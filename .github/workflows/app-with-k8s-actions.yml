@@ -19,6 +19,13 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
+      - name: Make application.properties
+        run: |
+          cd ./src/main/resources
+          touch ./application.properties
+          echo "${{ secrets.PROPERTIES }}" > ./application.properties
+        shell: bash
+
       - name: Build with Maven
         run: mvn -DskipTests -B package --file pom.xml
 
